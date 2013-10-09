@@ -28,7 +28,7 @@ func (m *DenseMat) Cols() int {
 }
 
 /*
- * Basic in place matrix add and subtract
+ * In place matrix add and subtract
  */
 
 func (m *DenseMat) Add(other *DenseMat) {
@@ -48,7 +48,7 @@ func (m *DenseMat) Sub(other *DenseMat) {
 }
 
 /*
- * Matrix multiplication, not in place
+ * Matrix multiplication and transpose, not in place
  */
 
 func Mul(a, b *DenseMat) *DenseMat {
@@ -63,6 +63,16 @@ func Mul(a, b *DenseMat) *DenseMat {
 		}
 	}
 	return prod
+}
+
+func (m *DenseMat) T() *DenseMat {
+	mT := New(m.cols, m.rows)
+	for r := 0; r < m.rows; r++ {
+		for c := 0; c < m.cols; c++ {
+			mT.ent[c*mT.cols+r] = m.ent[r*m.cols+c]
+		}
+	}
+	return mT
 }
 
 /*
@@ -82,3 +92,13 @@ func Ones(rows, cols int) *DenseMat {
 	}
 	return newOnes
 }
+
+func (m *DenseMat) Copy() *DenseMat {
+	mCopy := New(m.rows, m.cols)
+	for r := 0; r < mCopy.rows; r++ {
+		for c := 0; c < mCopy.cols; c++ {
+			mCopy.ent[r*mCopy.cols+c] = m.ent[r*m.cols+c]
+		}
+	}
+	return mCopy
+}	

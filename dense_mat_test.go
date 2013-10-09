@@ -137,3 +137,20 @@ func TestMul(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestTranspose(t *testing.T) {
+	m := New(31, 72)
+	for r := 0; r < m.rows; r++ {
+		for c := 0; c < m.cols; c++ {
+			m.Set(r, c, float64(r + c))
+		}
+	}
+	mT := m.T()
+	for r := 0; r < mT.rows; r++ {
+		for c := 0; c < mT.cols; c++ {
+			if mT.At(r, c) != m.At(c, r) {
+				t.FailNow()
+			}
+		}
+	}
+}

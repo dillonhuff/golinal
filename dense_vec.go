@@ -61,3 +61,11 @@ func OnesVec(n int) *DenseVec {
 	}
 	return ones
 }
+
+func (v *DenseVec) Copy() *DenseVec {
+	vCopy := NewVec(v.n)
+	for i := 0; i < vCopy.n; i++ {
+		vCopy.ent[i] = v.ent[i]
+	}
+	return vCopy
+}
