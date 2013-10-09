@@ -29,6 +29,18 @@ func (v *DenseVec) Sub(other *DenseVec) {
 }
 
 /*
+ * Norm and dot product functions
+ */
+
+ func (v *DenseVec) Dot(other *DenseVec) float64 {
+	dotProd := float64(0.0)
+	for i := 0; i < v.n; i++ {
+		dotProd += v.ent[i]*other.ent[i]
+	}
+	return dotProd
+ }
+
+/*
  * Dense vector creation functions
  */
  

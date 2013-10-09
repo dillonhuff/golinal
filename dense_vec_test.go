@@ -14,7 +14,6 @@ func TestOnesVec(t *testing.T) {
 func TestAddOnesVec(t *testing.T) {
 	v := OnesVec(4)
 	w := OnesVec(4)
-	
 	v.Add(w)
 	
 	for i := 0; i < 4; i++ {
@@ -50,12 +49,47 @@ func TestAddDifferent(t *testing.T) {
 
 func TestSubOnesVec(t *testing.T) {
 	v := OnesVec(345)
-	
 	v.Sub(v)
 	
 	for i := 0; i < 345; i++ {
 		if v.At(i) != 0.0 {
 			t.FailNow()
 		}
+	}
+}
+
+func TestDotZeroVec(t *testing.T) {
+	v := NewVec(32)
+	d := v.Dot(v)
+	if d != 0.0 {
+		t.FailNow()
+	}
+}
+
+func TestDotOnesVec(t *testing.T) {
+	v := OnesVec(12)
+	d := v.Dot(v)
+	if d != 12 {
+		t.FailNow()
+	}
+}
+
+func TestDotProdTwoDifferentVecs(t *testing.T) {
+	v := NewVec(3)
+	v.Set(0, -1)
+	v.Set(1, 2)
+	v.Set(2, 3)
+	
+	w := NewVec(3)
+	w.Set(0, -2)
+	w.Set(1, 5)
+	w.Set(2, 1)
+	
+	d := v.Dot(w)
+	if d != 15.0 {
+		t.FailNow()
+	}
+	if v.Dot(w) != w.Dot(v) {
+		t.FailNow()
 	}
 }
