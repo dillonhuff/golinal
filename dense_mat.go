@@ -57,11 +57,9 @@ func Mul(a, b *DenseMat) *DenseMat {
 	prod := New(a.rows, b.cols)
 	for r := 0; r < a.rows; r++ {
 		for c := 0; c < b.cols; c++ {
-			s := float64(0.0)
 			for k := 0; k < a.cols; k++ {
-				s += a.ent[r*a.cols+k]*b.ent[k*b.cols+c]
+				prod.ent[r*prod.cols+c] += a.ent[r*a.cols+k]*b.ent[k*b.cols+c]
 			}
-			prod.ent[r*prod.cols+c] = s
 		}
 	}
 	return prod
