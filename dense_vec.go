@@ -1,5 +1,7 @@
 package golinal
 
+import "math"
+
 type DenseVec struct {
 	ent []float64
 	n int
@@ -32,13 +34,17 @@ func (v *DenseVec) Sub(other *DenseVec) {
  * Norm and dot product functions
  */
 
- func (v *DenseVec) Dot(other *DenseVec) float64 {
+func (v *DenseVec) Dot(other *DenseVec) float64 {
 	dotProd := float64(0.0)
 	for i := 0; i < v.n; i++ {
 		dotProd += v.ent[i]*other.ent[i]
 	}
 	return dotProd
- }
+}
+
+func (v *DenseVec) Norm() float64 {
+	return math.Sqrt(v.Dot(v))
+}
 
 /*
  * Dense vector creation functions

@@ -60,16 +60,14 @@ func TestSubOnesVec(t *testing.T) {
 
 func TestDotZeroVec(t *testing.T) {
 	v := NewVec(32)
-	d := v.Dot(v)
-	if d != 0.0 {
+	if v.Dot(v) != 0.0 {
 		t.FailNow()
 	}
 }
 
 func TestDotOnesVec(t *testing.T) {
 	v := OnesVec(12)
-	d := v.Dot(v)
-	if d != 12 {
+	if v.Dot(v) != 12 {
 		t.FailNow()
 	}
 }
@@ -85,11 +83,25 @@ func TestDotProdTwoDifferentVecs(t *testing.T) {
 	w.Set(1, 5)
 	w.Set(2, 1)
 	
-	d := v.Dot(w)
-	if d != 15.0 {
+	if v.Dot(w) != 15.0 {
 		t.FailNow()
 	}
 	if v.Dot(w) != w.Dot(v) {
+		t.FailNow()
+	}
+}
+
+func TestNormZeroVec(t *testing.T) {
+	v := NewVec(23)
+	if v.Norm() != 0.0 {
+		t.FailNow()
+	}
+}
+
+func TestNormUnitVec(t *testing.T) {
+	v := NewVec(12)
+	v.Set(4, 1)
+	if v.Norm() != 1.0 {
 		t.FailNow()
 	}
 }
