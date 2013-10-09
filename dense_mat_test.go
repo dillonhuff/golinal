@@ -154,3 +154,15 @@ func TestTranspose(t *testing.T) {
 		}
 	}
 }
+
+func TestMatScalarMul(t *testing.T) {
+	m := Ones(46, 47)
+	m.SMul(-1.2)
+	for r := 0; r < m.rows; r++ {
+		for c := 0; c < m.cols; c++ {
+			if m.At(r, c) != -1.2 {
+				t.FailNow()
+			}
+		}
+	}
+}

@@ -28,7 +28,7 @@ func (m *DenseMat) Cols() int {
 }
 
 /*
- * In place matrix add and subtract
+ * In place matrix add, subtract and scalar multiply
  */
 
 func (m *DenseMat) Add(other *DenseMat) {
@@ -43,6 +43,14 @@ func (m *DenseMat) Sub(other *DenseMat) {
 	for r := 0; r < m.rows; r++ {
 		for c := 0; c < m.cols; c++ {
 			m.ent[r*m.cols + c] -= other.ent[r*m.cols + c]
+		}
+	}
+}
+
+func (m *DenseMat) SMul(k float64) {
+	for r := 0; r < m.rows; r++ {
+		for c := 0; c < m.cols; c++ {
+			m.ent[r*m.cols+c] *= k
 		}
 	}
 }

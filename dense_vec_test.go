@@ -105,3 +105,13 @@ func TestNormUnitVec(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestVecScalarMul(t *testing.T) {
+	v := OnesVec(29)
+	v.SMul(2.3)
+	for i := 0; i < 29; i++ {
+		if v.At(i) != 2.3 {
+			t.FailNow()
+		}
+	}
+}

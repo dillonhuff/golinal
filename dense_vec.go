@@ -16,7 +16,7 @@ func (v *DenseVec) Set(i int, val float64) {
 }
 
 /*
- * In place add and subtract
+ * In place add, subtract and scalar multiply
  */
 func (v *DenseVec) Add(other *DenseVec) {
 	for i := 0; i < v.n; i++ {
@@ -27,6 +27,12 @@ func (v *DenseVec) Add(other *DenseVec) {
 func (v *DenseVec) Sub(other *DenseVec) {
 	for i := 0; i < v.n; i++ {
 		v.ent[i] -= other.ent[i]
+	}
+}
+
+func (v *DenseVec) SMul(k float64) {
+	for i := 0; i < v.n; i++ {
+		v.ent[i] *= k
 	}
 }
 
