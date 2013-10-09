@@ -75,3 +75,65 @@ func TestSub(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestSubOnes(t *testing.T) {
+	ones1 := New(47, 21)
+	ones2 := New(47, 21)
+	ones1.Sub(ones2)
+	for i := 0; i < ones1.rows; i++ {
+		for j := 0; j < ones2.cols; j++ {
+			if (ones1.At(i, j) != 0.0) {
+				t.FailNow()
+			}
+		}
+	}
+}
+
+func TestMulOnes(t *testing.T) {
+	ones1 := Ones(52, 13)
+	ones2 := Ones(13, 21)
+	
+	prod := Mul(ones1, ones2)
+	
+	for r := 0; r < prod.rows; r++ {
+		for c := 0; c < prod.cols; c++ {
+			if prod.At(r, c) != 13.0 {
+				t.FailNow()
+			}
+		}
+	}
+}
+
+func TestMul(t *testing.T) {
+	a := New(2, 3)
+	b := New(3, 2)
+	
+	a.Set(0, 0, 1)
+	a.Set(0, 1, 2)
+	a.Set(0, 2, 4)
+	a.Set(1, 0, -3)
+	a.Set(1, 1, 2)
+	a.Set(1, 2, 1)
+	
+	b.Set(0, 0, -2)
+	b.Set(0, 1, 1)
+	b.Set(1, 0, 3)
+	b.Set(1, 1, 2)
+	b.Set(2, 0, 4)
+	b.Set(2, 1, 1)
+	
+	prod := Mul(a, b)
+	
+	if prod.At(0, 0) != 20 {
+		t.FailNow()
+	}
+	if prod.At(0, 1) != 9 {
+		t.FailNow()
+	}
+	if prod.At(1, 0) != 16 {
+		t.FailNow()
+	}
+	if prod.At(1, 1) != 2 {
+		t.FailNow()
+	}
+}

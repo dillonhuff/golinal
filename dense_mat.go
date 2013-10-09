@@ -1,8 +1,7 @@
 /*
  * Simple matrix library for go, does not do any runtime
  * checks of dimension or other properties (triangularity, 
- * bandedness etc). Operations are done in place on the
- * receiver
+ * bandedness etc).
  */
  
 package golinal
@@ -29,7 +28,7 @@ func (m *DenseMat) Cols() int {
 }
 
 /*
- * Basic matrix operations
+ * Basic in place matrix add and subtract
  */
 
 func (m *DenseMat) Add(other *DenseMat) {
@@ -46,6 +45,24 @@ func (m *DenseMat) Sub(other *DenseMat) {
 			m.ent[r*m.cols + c] -= other.ent[r*m.cols + c]
 		}
 	}
+}
+
+/*
+ * Matrix multiplication, not in place
+ */
+
+func Mul(a, b *DenseMat) *DenseMat {
+	prod := New(a.rows, b.cols)
+	for r := 0; r < a.rows; r++ {
+		for c := 0; c < b.cols; c++ {
+			s := float64(0.0)
+			for k := 0; k < a.cols; k++ {
+				s += a.ent[r*a.cols+k]*b.ent[k*b.cols+c]
+			}
+			prod.ent[r*prod.cols+c] = s
+		}
+	}
+	return prod
 }
 
 /*
