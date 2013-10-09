@@ -5,7 +5,7 @@
  * receiver
  */
  
-package mat
+package golinal
 
 type DenseMat struct {
 	ent []float64
