@@ -1,9 +1,3 @@
-/*
- * Simple matrix library for go, does not do any runtime
- * checks of dimension or other properties (triangularity, 
- * bandedness etc).
- */
- 
 package golinal
 
 type DenseMat struct {
