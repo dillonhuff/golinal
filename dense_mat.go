@@ -50,7 +50,7 @@ func (m *DenseMat) SMul(k float64) {
 }
 
 /*
- * Matrix multiplication and transpose, not in place
+ * Matrix multiplication, add, subtract and transpose, not in place
  */
 
 func Mul(a, b *DenseMat) *DenseMat {
@@ -63,6 +63,18 @@ func Mul(a, b *DenseMat) *DenseMat {
 		}
 	}
 	return prod
+}
+
+func Add(a, b *DenseMat) *DenseMat {
+	sum := a.Copy()
+	sum.Add(b)
+	return sum
+}
+
+func Sub(a, b *DenseMat) *DenseMat {
+	diff := a.Copy()
+	diff.Sub(b)
+	return diff
 }
 
 func (m *DenseMat) T() *DenseMat {
