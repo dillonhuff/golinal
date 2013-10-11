@@ -166,3 +166,26 @@ func TestMatScalarMul(t *testing.T) {
 		}
 	}
 }
+
+func TestMatSwapRows(t *testing.T) {
+	m := New(2, 3)
+	m.Set(0, 0, 1)
+	m.Set(0, 1, 2)
+	m.Set(0, 2, -3.4)
+	m.SwapRows(0, 1)
+	
+	for i := 0; i < 3; i++ {
+		if m.At(0, i) != 0.0 {
+			t.FailNow()
+		}
+	}
+	if m.At(1, 0) != 1.0 {
+		t.FailNow()
+	}
+	if m.At(1, 1) != 2.0 {
+		t.FailNow()
+	}
+	if m.At(1, 2) != -3.4 {
+		t.FailNow()
+	}
+}

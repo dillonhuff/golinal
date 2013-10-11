@@ -113,4 +113,13 @@ func (m *DenseMat) Copy() *DenseMat {
 		}
 	}
 	return mCopy
-}	
+}
+
+/*
+ * Matrix permutation and manipulation functions
+ */
+func (m *DenseMat) SwapRows(r1, r2 int) {
+	for i := 0; i < m.cols; i++ {
+		m.ent[r1*m.cols+i], m.ent[r2*m.cols+i] = m.ent[r2*m.cols+i], m.ent[r1*m.cols+i]
+	}
+}
