@@ -134,3 +134,13 @@ func (m *DenseMat) SwapRows(r1, r2 int) {
 		m.ent[r1*m.cols+i], m.ent[r2*m.cols+i] = m.ent[r2*m.cols+i], m.ent[r1*m.cols+i]
 	}
 }
+
+func (m *DenseMat) PartialPivotRow(c int) int {
+	bestRow := c
+	for i := c+1; i < m.rows; i++ {
+		if (m.ent[i*m.cols+c] > m.ent[bestRow*m.cols+c]) {
+			bestRow = i
+		}
+	}
+	return bestRow
+}

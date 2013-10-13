@@ -30,4 +30,26 @@ func TestInPlaceLU(t *testing.T) {
 		}
 		correct--;
 	}
+	
+	correctMat := New(4, 4)
+	correctMat.Set(0, 0, 4)
+	correctMat.Set(0, 1, 5)
+	correctMat.Set(0, 2, 14)
+	correctMat.Set(0, 3, 14)
+	correctMat.Set(1, 0, 0.5)
+	correctMat.Set(1, 1, 2.5)
+	correctMat.Set(1, 2, -5)
+	correctMat.Set(1, 3, -10)
+	correctMat.Set(2, 0, 0.75)
+	correctMat.Set(2, 1, 0.9)
+	correctMat.Set(2, 2, -1)
+	correctMat.Set(2, 3, 0.5)
+	correctMat.Set(3, 0, 0.5)
+	correctMat.Set(3, 1, 0.6)
+	correctMat.Set(3, 2, 1)
+	correctMat.Set(3, 3, 0.5)
+	
+	if !MatApproxEqual(correctMat, a, 0.00001) {
+		t.FailNow()
+	}
 }
