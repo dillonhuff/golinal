@@ -24,3 +24,23 @@ func (m *DenseMat) InPlaceLU() *Permutation {
 	}
 	return p
 }
+
+func (m *DenseMat) LU() (*DenseMat, *DenseMat, *Permutation) {
+	mCopy := m.Copy()
+	p := mCopy.InPlaceLU()
+	l := New(mCopy.rows, mCopy.cols)
+	u := New(mCopy.rows, mCopy.cols)
+	for r := 0; r < mCopy.rows; r++ {
+		for c := 0; c < mCopy.cols; c++ {
+			if (c >= r) {
+				u.ent[r*u.cols+c] = mCopy.ent[r*m.cols+c]
+			} else {
+				l.ent[r*l.cols+c] = mCopy.ent[r*m.cols+c]
+			}
+			if (r == c) {
+				l.ent[r*l.cols+c] = 1.0
+			}
+		}
+	}
+	return l, u, p
+}

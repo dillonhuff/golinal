@@ -1,5 +1,6 @@
 package golinal
 
+import "fmt"
 import "math"
 
 func MatApproxEqual(a, b *DenseMat, eps float64) bool {
@@ -9,4 +10,13 @@ func MatApproxEqual(a, b *DenseMat, eps float64) bool {
 		dist += diff.ent[i]*diff.ent[i]
 	}
 	return math.Sqrt(dist) < eps
+}
+
+func PrintDenseMat(m *DenseMat) {
+	for r := 0; r < m.rows; r++ {
+		for c := 0; c < m.cols; c++ {
+			fmt.Printf("%f ", m.ent[r*m.cols+c])
+		}
+		fmt.Println()
+	}
 }

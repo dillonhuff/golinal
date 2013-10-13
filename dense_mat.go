@@ -1,5 +1,7 @@
 package golinal
 
+import "math/rand"
+
 type DenseMat struct {
 	ent []float64
 	rows, cols int
