@@ -23,4 +23,11 @@ func TestInPlaceLU(t *testing.T) {
 	
 	p := a.InPlaceLU()
 	
+	correct := 3;
+	for i := 0; i < a.rows; i++ {
+		if p.r[i] != correct {
+			t.FailNow()
+		}
+		correct--;
+	}
 }

@@ -118,12 +118,12 @@ func (m *DenseMat) Copy() *DenseMat {
 /*
  * Matrix permutation and manipulation functions
  */
- 
+
 func (m *DenseMat) PermuteRows(p *Permutation) *DenseMat {
 	permuted := New(m.rows, m.cols)
 	for r := 0; r < permuted.rows; r++ {
 		for c := 0; c < permuted.cols; c++ {
-			permuted.ent[r*permuted.cols+c] = m.ent[p.R(r)*m.cols+c]
+			permuted.ent[r*permuted.cols+c] = m.ent[p.r[r]*m.cols+c]
 		}
 	}
 	return permuted
