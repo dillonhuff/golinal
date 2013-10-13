@@ -1,6 +1,5 @@
 package golinal
 
-import "fmt"
 import "testing"
 
 func TestInPlaceLU(t *testing.T) {
@@ -80,3 +79,4 @@ func TestDenseLU(t *testing.T) {
 		t.FailNow()
 	}
 }
+

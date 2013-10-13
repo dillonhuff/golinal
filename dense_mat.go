@@ -118,6 +118,21 @@ func (m *DenseMat) Copy() *DenseMat {
 }
 
 /*
+ * Returns an i by j dense matrix with entries normally
+ * distributed between -max(float64) and max(float64) with
+ * mean 0 and standard deviation 1
+ */
+func NormMat(i, j int) *DenseMat{
+	normMat := New(i, j)
+	for r := 0; r < i; r++ {
+		for c := 0; c < j; c++ {
+			normMat.ent[r*normMat.cols+c] = rand.NormFloat64()
+		}
+	}
+	return normMat
+}
+
+/*
  * Matrix permutation and manipulation functions
  */
 
