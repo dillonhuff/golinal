@@ -71,7 +71,7 @@ func TestSolveLowerTriangular(t *testing.T) {
 	}
 }
 
-func TestRandomSystemSolve(t *testing.T) {
+func TestSystemSolve(t *testing.T) {
 	m := New(3, 3)
 	m.Set(0, 0, 1)
 	m.Set(0, 1, -3)
@@ -90,6 +90,17 @@ func TestRandomSystemSolve(t *testing.T) {
 	
 	sol := Solve(m, b)
 	if !VecApproxEqual(MVMul(m, sol), b, 0.0001) {
+		t.FailNow()
+	}
+}
+
+func TestRandomSystemSolve(t *testing.T) {
+	m := NormMat(3, 3)
+	b := NormVec(3)
+	sol := Solve(m, b)
+	PrintDenseVec(MVMul(m, sol))
+	PrintDenseVec(b)
+	if !VecApproxEqual(MVMul(m, sol), b, .0001) {
 		t.FailNow()
 	}
 }

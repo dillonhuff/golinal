@@ -45,7 +45,7 @@ func LTSolve(m *DenseMat, v *DenseVec) *DenseVec {
  */
 func Solve(m *DenseMat, v *DenseVec) *DenseVec {
 	l, u, p := m.LU()
-	x := v.Permute(p.Inverse())
+	x := v.Permute(p)
 	z := LTSolve(l, x)
 	b := UTSolve(u, z)
 	return b
