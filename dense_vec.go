@@ -1,6 +1,7 @@
 package golinal
 
 import "math"
+import "math/rand"
 
 type DenseVec struct {
 	ent []float64
@@ -13,6 +14,14 @@ func (v *DenseVec) At(i int) float64 {
 
 func (v *DenseVec) Set(i int, val float64) {
 	v.ent[i] = val
+}
+
+func (v *DenseVec) Permute(p *Permutation) *DenseVec {
+	permuted := v.Copy()
+	for i := 0; i < v.n; i++ {
+		permuted.ent[i] = v.ent[p.r[i]]
+	}
+	return permuted
 }
 
 /*
@@ -34,6 +43,21 @@ func (v *DenseVec) SMul(k float64) {
 	for i := 0; i < v.n; i++ {
 		v.ent[i] *= k
 	}
+}
+
+/*
+ * Functions to return sums, differences of vectors
+ */
+func (v *DenseVec) Sum(other *DenseVec) *DenseVec {
+	sum := v.Copy()
+	sum.Add(other)
+	return sum
+}
+
+func (v *DenseVec) Diff(other *DenseVec) *DenseVec {
+	diff := v.Copy()
+	diff.Sub(other)
+	return diff
 }
 
 /*
@@ -74,4 +98,18 @@ func (v *DenseVec) Copy() *DenseVec {
 		vCopy.ent[i] = v.ent[i]
 	}
 	return vCopy
+}
+
+/*
+ * Generates an n dimensional vector with
+ * entries normally distributed from -max(float64)
+ * to max(float64) with mean 0 and standard
+ * deviation 1
+ */
+func NormVec(n int) *DenseVec {
+	normVec := NewVec(n)
+	for i := 0; i < n; i++ {
+		normVec.ent[i] = rand.NormFloat64()
+	}
+	return normVec
 }

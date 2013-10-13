@@ -20,9 +20,9 @@ func UTSolve(m *DenseMat, v *DenseVec) *DenseVec {
 	for i := sol.n-1; i >= 0; i-- {
 		sol.ent[i] = v.ent[i]
 		for j := m.cols-1; j > i; j-- {
-			sol.ent[i] -= m.ent[i*m.rows+j]*sol.ent[j]
+			sol.ent[i] -= m.ent[i*m.cols+j]*sol.ent[j]
 		}
-		sol.ent[i] /= m.ent[i*m.rows+i]
+		sol.ent[i] /= m.ent[i*m.cols+i]
 	}
 	return sol
 }
@@ -37,4 +37,16 @@ func LTSolve(m *DenseMat, v *DenseVec) *DenseVec {
 		sol.ent[i] /= m.ent[i*m.cols+i]
 	}
 	return sol
+}
+
+/*
+ * Solve dense linear system by LU decomposition and
+ * back substitution
+ */
+func Solve(m *DenseMat, v *DenseVec) *DenseVec {
+	l, u, p := m.LU()
+	x := v.Permute(p.Inverse())
+	z := LTSolve(l, x)
+	b := UTSolve(u, z)
+	return b
 }

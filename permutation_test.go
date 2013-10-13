@@ -27,3 +27,15 @@ func TestPermute(t *testing.T) {
 		}
 	}
 }
+
+func TestInverse(t *testing.T) {
+	p := NewPermutation(4)
+	p.Swap(0, 1)
+	p.Swap(2, 3)
+	p.Swap(0, 2)
+	pInv := p.Inverse()
+	randM := NormMat(4, 3)
+	if !MatApproxEqual(randM.PermuteRows(p).PermuteRows(pInv), randM, 0.00000001) {
+		t.FailNow()
+	}
+}

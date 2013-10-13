@@ -12,6 +12,11 @@ func MatApproxEqual(a, b *DenseMat, eps float64) bool {
 	return math.Sqrt(dist) < eps
 }
 
+func VecApproxEqual(u, v *DenseVec, eps float64) bool {
+	diff := u.Diff(v)
+	return diff.Norm() < eps
+}
+
 func PrintDenseMat(m *DenseMat) {
 	for r := 0; r < m.rows; r++ {
 		for c := 0; c < m.cols; c++ {
@@ -19,4 +24,17 @@ func PrintDenseMat(m *DenseMat) {
 		}
 		fmt.Println()
 	}
+}
+
+func PrintDenseVec(v *DenseVec) {
+	for i := 0; i < v.n; i++ {
+		fmt.Println(v.ent[i])
+	}
+}
+
+func PrintPermutation(p *Permutation) {
+	for i := 0; i < p.n; i++ {
+		fmt.Printf("%d ", p.r[i])
+	}
+	fmt.Println()
 }

@@ -70,3 +70,26 @@ func TestSolveLowerTriangular(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestRandomSystemSolve(t *testing.T) {
+	m := New(3, 3)
+	m.Set(0, 0, 1)
+	m.Set(0, 1, -3)
+	m.Set(0, 2, 0)
+	m.Set(1, 0, 2)
+	m.Set(1, 1, 1)
+	m.Set(1, 2, 1)
+	m.Set(2, 0, 3)
+	m.Set(2, 1, -1)
+	m.Set(2, 2, 2)
+	
+	b := NewVec(3)
+	b.Set(0, 0)
+	b.Set(1, 0)
+	b.Set(2, 1)
+	
+	sol := Solve(m, b)
+	if !VecApproxEqual(MVMul(m, sol), b, 0.0001) {
+		t.FailNow()
+	}
+}

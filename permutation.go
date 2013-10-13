@@ -6,7 +6,15 @@ type Permutation struct {
 }
 
 func (p *Permutation) Swap(i, j int) {
-	p.r[i], p.r[j] = j, i
+	p.r[i], p.r[j] = p.r[j], p.r[i]
+}
+
+func (p *Permutation) Inverse() *Permutation {
+	pInv := NewPermutation(p.n)
+	for i := 0; i < p.n; i++ {
+		pInv.r[p.r[i]] = i
+	}
+	return pInv
 }
 
 func NewPermutation(n int) *Permutation {
