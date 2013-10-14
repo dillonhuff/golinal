@@ -38,3 +38,10 @@ func PrintPermutation(p *Permutation) {
 	}
 	fmt.Println()
 }
+
+//So you don't have to import fmt any time
+//you want to separate the output of other
+//print methods while debugging
+func Println() {
+	fmt.Println()
+}

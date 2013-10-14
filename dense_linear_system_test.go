@@ -95,12 +95,10 @@ func TestSystemSolve(t *testing.T) {
 }
 
 func TestRandomSystemSolve(t *testing.T) {
-	m := NormMat(3, 3)
-	b := NormVec(3)
+	m := NormMat(30, 30)
+	b := NormVec(30)
 	sol := Solve(m, b)
-	PrintDenseVec(MVMul(m, sol))
-	PrintDenseVec(b)
-	if !VecApproxEqual(MVMul(m, sol), b, .0001) {
+	if !VecApproxEqual(MVMul(m, sol), b, .00001) {
 		t.FailNow()
 	}
 }

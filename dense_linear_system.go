@@ -40,13 +40,13 @@ func LTSolve(m *DenseMat, v *DenseVec) *DenseVec {
 }
 
 /*
- * Solve dense linear system by LU decomposition and
+ * Solve dense linear system ax=b by LU decomposition and
  * back substitution
  */
-func Solve(m *DenseMat, v *DenseVec) *DenseVec {
-	l, u, p := m.LU()
-	x := v.Permute(p)
-	z := LTSolve(l, x)
-	b := UTSolve(u, z)
-	return b
+func Solve(a *DenseMat, b *DenseVec) *DenseVec {
+	l, u, p := a.LU()
+	bP := b.Permute(p)
+	z := LTSolve(l, bP)
+	x := UTSolve(u, z)
+	return x
 }
